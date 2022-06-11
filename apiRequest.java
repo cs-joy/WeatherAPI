@@ -1,24 +1,78 @@
+String url = ""; // url of your api
+
 JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
 
                                 try {
+                                  
+                                    // without JSONArray and JSONObject of Object that means only JSONObject
+                                    /*
+                                      {
+                                        "base":"stations",
+                                        "visibility":10000,
+                                        "timezone":28800,
+                                        "id":1880252,
+                                        "name":"Singapore",
+                                        "cod":200
+                                      }
+                                    */
+                                    String base = response.getString("base");
+                                    int visibility = response.getInt("visibility");
+                                    int timezone = response.getInt("timezone");
+                                    int id = response.getInt("id");
+                                    String name = response.getString("name");
+                                    int cod = response.getInt("cod");
+                                  
+                                  
+                                  
+                                    // with JSONArray of Object
                                     JSONArray jsonArray = response.getJSONArray("weather");
 
-                                    //for(int i = 0; i < jsonArray.length(); i++) {
-                                        JSONObject with = jsonArray.getJSONObject(0);
+                                    
+                                        JSONObject arrayObj = jsonArray.getJSONObject(0);
+                                        /*
+                                        "weather":[
+                                          {
+                                            "id":501,
+                                            "main":"Rain",
+                                            "description":"moderate rain",
+                                            "icon":"10n"
+                                          }
+                                        ]
+                                        */
+                                        int id = arrayObj.getInt("id");
+                                        String main = arrayObj.getString("main");
+                                        String description = arrayObj.getString("description");
+                                        String icon = arrayObj.getString("icon");
                                   
-                                        // without JSONArray
-                                        JSONObject json = response.getJSONObject("sys");
+                                  
+                                  
+                                  
+                                  
+                                        // with JSONObject of Object
+                                        JSONObject jsonObj = response.getJSONObject("sys");
+                                       /*
+                                         "sys":
+                                         {
+                                           "type":1,
+                                           "id":9470,
+                                           "country":"SG",
+                                           "sunrise":1654901907,
+                                           "sunset":1654945804
+                                         }
+                                       */
+                                        int type = jsonObj.getInt("type");
+                                        int id = jsonObj.getInt("id");
+                                        String country = jsonObj.getString("country");
+                                        int sunrise = jsonObj.getInt("sunrise");
+                                        int sunset = jsonObj.getInt("sunset");
 
-                                        //int id = with.getInt("id");
-                                        int main = response.getInt("id");
-                                        //int main = json.getInt("sunrise");
-                                       // String description = with.getString("description");
-                                        //String icon = with.getString("icon");
+                                        
+                                                                    
 
-                                        Toast.makeText(MainActivity.this, "dt: " + main, Toast.LENGTH_SHORT).show();
-                                    //}
+                                        Toast.makeText(MainActivity.this, "title: " + base, Toast.LENGTH_SHORT).show();
+                                    
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -30,4 +84,4 @@ JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                             public void onErrorResponse(VolleyError error) {
                                 Toast.makeText(MainActivity.this, "Something wrong!", Toast.LENGTH_SHORT).show();
                             }
-                        });
+ });
