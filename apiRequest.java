@@ -24,6 +24,9 @@ JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                                     String name = response.getString("name");
                                     int cod = response.getInt("cod");
                                   
+                                  // print the result with Toast
+                                  Toast.makeText(MainActivity.this, "base: " + base + ",visibility : " + visibility + ",timezone : " + timezone + ",id : " + id + ",name : " + name + ",cod : " + cod, Toast.LENGTH_SHORT).show();
+                                  
                                   
                                   
                                     // with JSONArray of Object
@@ -46,6 +49,9 @@ JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                                         String description = arrayObj.getString("description");
                                         String icon = arrayObj.getString("icon");
                                   
+                                       // print the result with Toast
+                                     Toast.makeText(MainActivity.this, "id: " + id + ",main : " + main + ",description : " + description + ",icon : " + icon, Toast.LENGTH_SHORT).show();
+                                  
                                   
                                   
                                   
@@ -67,12 +73,9 @@ JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                                         String country = jsonObj.getString("country");
                                         int sunrise = jsonObj.getInt("sunrise");
                                         int sunset = jsonObj.getInt("sunset");
+                                         // print the result with Toast
+                                      Toast.makeText(MainActivity.this, "type: " + type + ",id : " + id + ",country : " + country + ",sunrise : " + sunrise + ",sunset : " + sunset, Toast.LENGTH_SHORT).show();
 
-                                        
-                                                                    
-
-                                        Toast.makeText(MainActivity.this, "title: " + base, Toast.LENGTH_SHORT).show();
-                                    
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -82,6 +85,6 @@ JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(MainActivity.this, "Something wrong!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Error Occured!", Toast.LENGTH_SHORT).show();
                             }
  });
